@@ -8,6 +8,7 @@
 		"travis-deploy-once": "travis-deploy-once",
 		"semantic-release": "semantic-release",
 		"watch": "tsc -- --watch",
+		"docs": "docsify serve docs",
 		"test": "jest"
 	},
 	"repository": {
