@@ -1,7 +1,7 @@
 import React from "react";
 import { Collector, collect } from "../Collector";
 
-class App1 extends React.Component {
+class App2 extends React.Component {
 	public items: (Foo | Bar)[];
 
 	constructor(props, context) {
@@ -35,4 +35,4 @@ class Bar extends React.Component {
 }
 const WrappedBar = collect(Bar);
 
-export { App1 };
+export { App2 };

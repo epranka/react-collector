@@ -1,7 +1,7 @@
 import React from "react";
 import { Collector, collect, WithCollect } from "../Collector";
 
-class App3 extends React.Component {
+class App4 extends React.Component {
 	public items: (HTMLDivElement | HTMLSpanElement | HTMLParagraphElement)[];
 
 	constructor(props, context) {
@@ -40,4 +40,4 @@ const Zoo = collect(
 	})
 );
 
-export { App3 };
+export { App4 };

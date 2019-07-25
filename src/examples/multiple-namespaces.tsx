@@ -1,7 +1,7 @@
 import React from "react";
 import { Collector, collect } from "../Collector";
 
-class App4 extends React.Component {
+class App5 extends React.Component {
 	public foos: Foo[];
 	public bars: Bar[];
 
@@ -53,4 +53,4 @@ class Zoo extends React.Component {
 	}
 }
 
-export { App4 };
+export { App5 };

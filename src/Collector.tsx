@@ -1,4 +1,5 @@
 import * as React from "react";
+import hoistNonReactStatics from "hoist-non-react-statics";
 
 const Context = React.createContext<Collector | null>(undefined);
 
@@ -9,6 +10,7 @@ interface CollectorProps {
 export class Collector extends React.Component<CollectorProps> {
 	constructor(props: CollectorProps) {
 		super(props);
+		this.directRef = this.directRef.bind(this);
 		this.setRef = this.setRef.bind(this);
 		this.assertProps();
 	}
@@ -36,16 +38,36 @@ export class Collector extends React.Component<CollectorProps> {
 		} else if (namespace) {
 			// multiple namespace (must have namespace, otherwise ignoring)
 			const collected = this.props.collect[namespace];
-			if (!collected) return;
+			if (!collected) {
+				if (process.env.NODE_ENV === "development") {
+					console.warn(
+						`[Collector] namespace '${namespace}' not defined in 'collect' object or namespace value is not array. Initialize namespace value as array first.`
+					);
+				}
+				return;
+			}
 			if (!collected.includes(node)) {
 				collected.push(node);
 			}
 		}
 	}
+
+	private directRef(namespaceOrNode?: any) {
+		if (typeof namespaceOrNode === "string") {
+			return node => {
+				this.setRef(node, namespaceOrNode);
+			};
+		} else {
+			return this.setRef(namespaceOrNode);
+		}
+	}
+
 	public render() {
 		return (
 			<Context.Provider value={this}>
-				{this.props.children}
+				{typeof this.props.children === "function"
+					? this.props.children(this.directRef)
+					: this.props.children}
 			</Context.Provider>
 		);
 	}
@@ -138,34 +160,8 @@ const collectComponent = (namespace?: string) => Component => {
 		}
 	}
 
-	// TODO hoist
+	hoistNonReactStatics(WrapWithContext, Component);
 	return WrapWithContext as any;
-	// return (props => {
-	// 	return (
-	// 		<Collect namespace={namespace}>
-	// 			{({ ref }) => {
-	// 				const manuallyRef = node => {
-	// 					console.log("manually ref");
-	// 					return ref(node);
-	// 				};
-	// 				const autoRef = node => {
-	// 					console.log("auto");
-	// 					return ref(node);
-	// 				};
-	// 				return (
-	// 					// @ts-ignore
-	// 					<Component
-	// 						{...props}
-	// 						collect={manuallyRef}
-	// 						ref={autoRef}
-	// 					>
-	// 						{props.children}
-	// 					</Component>
-	// 				);
-	// 			}}
-	// 		</Collect>
-	// 	);
-	// }) as any;
 };
 
 export const collect = (namespaceOrComponent?: any) => {
