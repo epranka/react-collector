@@ -1,8 +1,8 @@
 - Getting started
 
   - [Quick start](quickstart.md)
-  - [Writing more pages](more-pages.md)
-  - [Custom navbar](custom-navbar.md)
+  - [API Reference](api.md)
+  - [Examples](examples.md)
   - [Cover page](cover.md)
 
 - Customization

@@ -1,0 +1,51 @@
+# API
+
+## Package exports
+
+```js
+import {Collector, collect, WithCollect} from "@epranka/react-collector";
+```
+
+| Export name | Short description |
+| -- | -- |
+| [Collector](#collector) | Root component of the collector package. Accepts a single prop **collect** which can be an array or an object of arrays |
+| [collect](#collect) | Wrapper component to wrap and element to collect. Also can be used as a decorator |
+| [WithCollect](#withcollect-only-in-typescript) *(only in typescript)* | Interface with an optional property **collect** |
+
+API Reference inspiration https://docs.veritone.com/#/apis/reference/mutation/?id=createlibrarytype
+
+## Collector
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur fringilla eget lectus a dignissim. Proin egestas enim eu ligula porttitor sollicitudin. Suspendisse potenti. Fusce augue nunc, ultricies a mattis et, placerat pharetra massa. Sed a ligula sit amet magna efficitur euismod. Duis venenatis viverra vulputate. Ut molestie accumsan dignissim. Integer dapibus lobortis libero sit amet tempus. Aliquam ac sapien ut sem venenatis euismod. In auctor, mauris ut gravida consequat, eros urna commodo neque, eu ultricies odio massa sit amet dolor. Nam sed dolor ut justo ullamcorper suscipit facilisis et nulla. Suspendisse aliquam vestibulum metus, at feugiat augue varius nec. Nulla pretium, dui ac porta pharetra, odio nunc faucibus neque, sit amet elementum lorem nulla sed diam.
+
+Vivamus ac rhoncus leo. Morbi vitae neque eget ipsum accumsan tincidunt. In augue libero, commodo in nulla nec, ullamcorper mattis ligula. Sed sodales varius odio, ac mattis est finibus vel. Sed maximus nulla sit amet placerat tincidunt. Pellentesque venenatis ipsum nisl, quis tincidunt leo rhoncus eget. Morbi mattis fringilla maximus. Mauris vitae cursus orci. Quisque sed tincidunt ante.
+
+Aenean blandit sapien neque, at condimentum nisi scelerisque ac. Fusce dui libero, sodales sed sem ut, mattis imperdiet ex. Nunc a lectus ornare, consequat sapien a, tristique velit. Ut sollicitudin erat sit amet facilisis gravida. Phasellus quis mollis lacus. Suspendisse sit amet sapien id nisl auctor sollicitudin a quis quam. Maecenas nec orci eget velit bibendum vestibulum vel quis sem. Mauris libero neque, fringilla nec ex in, ultricies condimentum neque. Donec ultricies libero eget augue efficitur, at placerat metus maximus. Vivamus eu ligula libero. Sed aliquam at massa nec rutrum. Fusce dapibus risus eu magna volutpat, a ornare lorem fringilla. Nulla tincidunt lacus at est ornare, at sollicitudin magna luctus. Praesent consequat, neque ac suscipit aliquet, felis mauris porta augue, in pulvinar nunc ipsum non erat. Mauris urna ante, molestie placerat nibh id, commodo vehicula lorem. Morbi luctus risus a tempor tincidunt.
+
+Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus eu lectus sem. Maecenas cursus pulvinar faucibus. Pellentesque tempus vestibulum lacinia. Duis eu blandit velit. Duis at massa facilisis, rhoncus justo eget, posuere purus. Maecenas sed auctor quam. Sed tempus justo diam, eu egestas leo pulvinar et. Donec id porttitor nisl, sed sodales enim.
+
+Sed blandit accumsan ante quis tincidunt. Duis suscipit, purus id consectetur tempor, nibh odio volutpat urna, quis egestas ligula nunc et nunc. Proin scelerisque, mauris vel volutpat iaculis, odio nunc cursus neque, id interdum massa libero non enim. Mauris ultricies odio turpis, id rhoncus dolor interdum sit amet. Nunc maximus interdum pharetra. Quisque fringilla dictum convallis. Phasellus vestibulum ornare diam, quis dignissim dui condimentum a. Phasellus a rhoncus ex, tempus volutpat ligula. Maecenas imperdiet placerat tortor sit amet pellentesque. In hac habitasse platea dictumst. Etiam a neque neque.
+
+## collect
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur fringilla eget lectus a dignissim. Proin egestas enim eu ligula porttitor sollicitudin. Suspendisse potenti. Fusce augue nunc, ultricies a mattis et, placerat pharetra massa. Sed a ligula sit amet magna efficitur euismod. Duis venenatis viverra vulputate. Ut molestie accumsan dignissim. Integer dapibus lobortis libero sit amet tempus. Aliquam ac sapien ut sem venenatis euismod. In auctor, mauris ut gravida consequat, eros urna commodo neque, eu ultricies odio massa sit amet dolor. Nam sed dolor ut justo ullamcorper suscipit facilisis et nulla. Suspendisse aliquam vestibulum metus, at feugiat augue varius nec. Nulla pretium, dui ac porta pharetra, odio nunc faucibus neque, sit amet elementum lorem nulla sed diam.
+
+Vivamus ac rhoncus leo. Morbi vitae neque eget ipsum accumsan tincidunt. In augue libero, commodo in nulla nec, ullamcorper mattis ligula. Sed sodales varius odio, ac mattis est finibus vel. Sed maximus nulla sit amet placerat tincidunt. Pellentesque venenatis ipsum nisl, quis tincidunt leo rhoncus eget. Morbi mattis fringilla maximus. Mauris vitae cursus orci. Quisque sed tincidunt ante.
+
+Aenean blandit sapien neque, at condimentum nisi scelerisque ac. Fusce dui libero, sodales sed sem ut, mattis imperdiet ex. Nunc a lectus ornare, consequat sapien a, tristique velit. Ut sollicitudin erat sit amet facilisis gravida. Phasellus quis mollis lacus. Suspendisse sit amet sapien id nisl auctor sollicitudin a quis quam. Maecenas nec orci eget velit bibendum vestibulum vel quis sem. Mauris libero neque, fringilla nec ex in, ultricies condimentum neque. Donec ultricies libero eget augue efficitur, at placerat metus maximus. Vivamus eu ligula libero. Sed aliquam at massa nec rutrum. Fusce dapibus risus eu magna volutpat, a ornare lorem fringilla. Nulla tincidunt lacus at est ornare, at sollicitudin magna luctus. Praesent consequat, neque ac suscipit aliquet, felis mauris porta augue, in pulvinar nunc ipsum non erat. Mauris urna ante, molestie placerat nibh id, commodo vehicula lorem. Morbi luctus risus a tempor tincidunt.
+
+Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus eu lectus sem. Maecenas cursus pulvinar faucibus. Pellentesque tempus vestibulum lacinia. Duis eu blandit velit. Duis at massa facilisis, rhoncus justo eget, posuere purus. Maecenas sed auctor quam. Sed tempus justo diam, eu egestas leo pulvinar et. Donec id porttitor nisl, sed sodales enim.
+
+Sed blandit accumsan ante quis tincidunt. Duis suscipit, purus id consectetur tempor, nibh odio volutpat urna, quis egestas ligula nunc et nunc. Proin scelerisque, mauris vel volutpat iaculis, odio nunc cursus neque, id interdum massa libero non enim. Mauris ultricies odio turpis, id rhoncus dolor interdum sit amet. Nunc maximus interdum pharetra. Quisque fringilla dictum convallis. Phasellus vestibulum ornare diam, quis dignissim dui condimentum a. Phasellus a rhoncus ex, tempus volutpat ligula. Maecenas imperdiet placerat tortor sit amet pellentesque. In hac habitasse platea dictumst. Etiam a neque neque.
+
+## WithCollect *(only in typescript)*
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur fringilla eget lectus a dignissim. Proin egestas enim eu ligula porttitor sollicitudin. Suspendisse potenti. Fusce augue nunc, ultricies a mattis et, placerat pharetra massa. Sed a ligula sit amet magna efficitur euismod. Duis venenatis viverra vulputate. Ut molestie accumsan dignissim. Integer dapibus lobortis libero sit amet tempus. Aliquam ac sapien ut sem venenatis euismod. In auctor, mauris ut gravida consequat, eros urna commodo neque, eu ultricies odio massa sit amet dolor. Nam sed dolor ut justo ullamcorper suscipit facilisis et nulla. Suspendisse aliquam vestibulum metus, at feugiat augue varius nec. Nulla pretium, dui ac porta pharetra, odio nunc faucibus neque, sit amet elementum lorem nulla sed diam.
+
+Vivamus ac rhoncus leo. Morbi vitae neque eget ipsum accumsan tincidunt. In augue libero, commodo in nulla nec, ullamcorper mattis ligula. Sed sodales varius odio, ac mattis est finibus vel. Sed maximus nulla sit amet placerat tincidunt. Pellentesque venenatis ipsum nisl, quis tincidunt leo rhoncus eget. Morbi mattis fringilla maximus. Mauris vitae cursus orci. Quisque sed tincidunt ante.
+
+Aenean blandit sapien neque, at condimentum nisi scelerisque ac. Fusce dui libero, sodales sed sem ut, mattis imperdiet ex. Nunc a lectus ornare, consequat sapien a, tristique velit. Ut sollicitudin erat sit amet facilisis gravida. Phasellus quis mollis lacus. Suspendisse sit amet sapien id nisl auctor sollicitudin a quis quam. Maecenas nec orci eget velit bibendum vestibulum vel quis sem. Mauris libero neque, fringilla nec ex in, ultricies condimentum neque. Donec ultricies libero eget augue efficitur, at placerat metus maximus. Vivamus eu ligula libero. Sed aliquam at massa nec rutrum. Fusce dapibus risus eu magna volutpat, a ornare lorem fringilla. Nulla tincidunt lacus at est ornare, at sollicitudin magna luctus. Praesent consequat, neque ac suscipit aliquet, felis mauris porta augue, in pulvinar nunc ipsum non erat. Mauris urna ante, molestie placerat nibh id, commodo vehicula lorem. Morbi luctus risus a tempor tincidunt.
+
+Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus eu lectus sem. Maecenas cursus pulvinar faucibus. Pellentesque tempus vestibulum lacinia. Duis eu blandit velit. Duis at massa facilisis, rhoncus justo eget, posuere purus. Maecenas sed auctor quam. Sed tempus justo diam, eu egestas leo pulvinar et. Donec id porttitor nisl, sed sodales enim.
+
+Sed blandit accumsan ante quis tincidunt. Duis suscipit, purus id consectetur tempor, nibh odio volutpat urna, quis egestas ligula nunc et nunc. Proin scelerisque, mauris vel volutpat iaculis, odio nunc cursus neque, id interdum massa libero non enim. Mauris ultricies odio turpis, id rhoncus dolor interdum sit amet. Nunc maximus interdum pharetra. Quisque fringilla dictum convallis. Phasellus vestibulum ornare diam, quis dignissim dui condimentum a. Phasellus a rhoncus ex, tempus volutpat ligula. Maecenas imperdiet placerat tortor sit amet pellentesque. In hac habitasse platea dictumst. Etiam a neque neque.

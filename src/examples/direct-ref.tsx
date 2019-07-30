@@ -12,11 +12,11 @@ class App1 extends React.Component {
 	public render() {
 		return (
 			<Collector collect={this.items}>
-				{setRef => {
+				{ref => {
 					return (
 						<>
-							<div ref={setRef} />
-							<div ref={setRef} />
+							<div ref={ref} />
+							<div ref={ref} />
 						</>
 					);
 				}}

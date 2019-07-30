@@ -14,9 +14,9 @@ yarn add @epranka/react-collector
 
 ## Simple usage
 
-```tsx
+```jsx
 import React, {Component} from 'react';
-import {Collector} from '@epranka/react-collector';
+import {Collector, collect} from '@epranka/react-collector';
 
 class App extends Component {
     items = [];
@@ -38,5 +38,4 @@ class App extends Component {
 }
 ```
 
-## Package exports
-
+?> Next checkout the [examples](examples.md)

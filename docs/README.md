@@ -19,7 +19,11 @@ See the [Quick start](quickstart.md) guide for more details.
 
 ## Examples
 
-Checkout the examples of usage in [scenarios page](examples.md)
+Checkout the examples of usage in [examples page](examples.md)
+
+## API Reference
+
+Checkout the [api reference](api.md) of detail usage information
 
 ## Author and collaboration
 
