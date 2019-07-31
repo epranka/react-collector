@@ -1,51 +1,109 @@
-# API
+# API Reference
 
 ## Package exports
 
 ```js
-import {Collector, collect, WithCollect} from "@epranka/react-collector";
+import { Collector, collect, WithCollect } from "@epranka/react-collector";
 ```
 
-| Export name | Short description |
-| -- | -- |
-| [Collector](#collector) | Root component of the collector package. Accepts a single prop **collect** which can be an array or an object of arrays |
-| [collect](#collect) | Wrapper component to wrap and element to collect. Also can be used as a decorator |
-| [WithCollect](#withcollect-only-in-typescript) *(only in typescript)* | Interface with an optional property **collect** |
+| Export name                                                           | Short description                                                                                                       |
+| --------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| [Collector](#collector)                                               | Root component of the collector package. Accepts a single prop **collect** which can be an array or an object of arrays |
+| [collect](#collect)                                                   | Wrapper component to wrap and element to collect. Also can be used as a decorator                                       |
+| [WithCollect](#withcollect-only-in-typescript) _(only in typescript)_ | Interface with an optional property **collect**                                                                         |
 
 API Reference inspiration https://docs.veritone.com/#/apis/reference/mutation/?id=createlibrarytype
 
-## Collector
+### Collector
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur fringilla eget lectus a dignissim. Proin egestas enim eu ligula porttitor sollicitudin. Suspendisse potenti. Fusce augue nunc, ultricies a mattis et, placerat pharetra massa. Sed a ligula sit amet magna efficitur euismod. Duis venenatis viverra vulputate. Ut molestie accumsan dignissim. Integer dapibus lobortis libero sit amet tempus. Aliquam ac sapien ut sem venenatis euismod. In auctor, mauris ut gravida consequat, eros urna commodo neque, eu ultricies odio massa sit amet dolor. Nam sed dolor ut justo ullamcorper suscipit facilisis et nulla. Suspendisse aliquam vestibulum metus, at feugiat augue varius nec. Nulla pretium, dui ac porta pharetra, odio nunc faucibus neque, sit amet elementum lorem nulla sed diam.
+`Collector: React.ComponentType<Props>`
 
-Vivamus ac rhoncus leo. Morbi vitae neque eget ipsum accumsan tincidunt. In augue libero, commodo in nulla nec, ullamcorper mattis ligula. Sed sodales varius odio, ac mattis est finibus vel. Sed maximus nulla sit amet placerat tincidunt. Pellentesque venenatis ipsum nisl, quis tincidunt leo rhoncus eget. Morbi mattis fringilla maximus. Mauris vitae cursus orci. Quisque sed tincidunt ante.
+Provides [React Context API](https://reactjs.org/docs/context.html) collects items to an array or arrays from the whole tree
 
-Aenean blandit sapien neque, at condimentum nisi scelerisque ac. Fusce dui libero, sodales sed sem ut, mattis imperdiet ex. Nunc a lectus ornare, consequat sapien a, tristique velit. Ut sollicitudin erat sit amet facilisis gravida. Phasellus quis mollis lacus. Suspendisse sit amet sapien id nisl auctor sollicitudin a quis quam. Maecenas nec orci eget velit bibendum vestibulum vel quis sem. Mauris libero neque, fringilla nec ex in, ultricies condimentum neque. Donec ultricies libero eget augue efficitur, at placerat metus maximus. Vivamus eu ligula libero. Sed aliquam at massa nec rutrum. Fusce dapibus risus eu magna volutpat, a ornare lorem fringilla. Nulla tincidunt lacus at est ornare, at sollicitudin magna luctus. Praesent consequat, neque ac suscipit aliquet, felis mauris porta augue, in pulvinar nunc ipsum non erat. Mauris urna ante, molestie placerat nibh id, commodo vehicula lorem. Morbi luctus risus a tempor tincidunt.
+_**Props**_<br />
 
-Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus eu lectus sem. Maecenas cursus pulvinar faucibus. Pellentesque tempus vestibulum lacinia. Duis eu blandit velit. Duis at massa facilisis, rhoncus justo eget, posuere purus. Maecenas sed auctor quam. Sed tempus justo diam, eu egestas leo pulvinar et. Donec id porttitor nisl, sed sodales enim.
+`collect: any[] | {[namespace: string] : any[]}` To collect all items to a [single array](examples.md#simple-usage-at-local-level), provide an empty array. To collect elements to their specific namespaces (types) provide an object of arrays with properties as namespaces
 
-Sed blandit accumsan ante quis tincidunt. Duis suscipit, purus id consectetur tempor, nibh odio volutpat urna, quis egestas ligula nunc et nunc. Proin scelerisque, mauris vel volutpat iaculis, odio nunc cursus neque, id interdum massa libero non enim. Mauris ultricies odio turpis, id rhoncus dolor interdum sit amet. Nunc maximus interdum pharetra. Quisque fringilla dictum convallis. Phasellus vestibulum ornare diam, quis dignissim dui condimentum a. Phasellus a rhoncus ex, tempus volutpat ligula. Maecenas imperdiet placerat tortor sit amet pellentesque. In hac habitasse platea dictumst. Etiam a neque neque.
+`children: React.ReactNode | ((collect: CollectMethod) => React.ReactNode)` Provide an array of childrens (as a simple React setup) or function with `collect: CollectMethod` as an argument which can be used to [reference direct elements](examples.md#simple-usage-at-local-level). About _collect_ method [see more](#collectmethod)
 
-## collect
+```jsx
+// this.items is an array or an object of arrays
+<Collector collect={this.items}>{/* Childrens or function */}</Collector>
+```
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur fringilla eget lectus a dignissim. Proin egestas enim eu ligula porttitor sollicitudin. Suspendisse potenti. Fusce augue nunc, ultricies a mattis et, placerat pharetra massa. Sed a ligula sit amet magna efficitur euismod. Duis venenatis viverra vulputate. Ut molestie accumsan dignissim. Integer dapibus lobortis libero sit amet tempus. Aliquam ac sapien ut sem venenatis euismod. In auctor, mauris ut gravida consequat, eros urna commodo neque, eu ultricies odio massa sit amet dolor. Nam sed dolor ut justo ullamcorper suscipit facilisis et nulla. Suspendisse aliquam vestibulum metus, at feugiat augue varius nec. Nulla pretium, dui ac porta pharetra, odio nunc faucibus neque, sit amet elementum lorem nulla sed diam.
+_See also:_<br/>
+[CollectMethod](#collectmethod)
 
-Vivamus ac rhoncus leo. Morbi vitae neque eget ipsum accumsan tincidunt. In augue libero, commodo in nulla nec, ullamcorper mattis ligula. Sed sodales varius odio, ac mattis est finibus vel. Sed maximus nulla sit amet placerat tincidunt. Pellentesque venenatis ipsum nisl, quis tincidunt leo rhoncus eget. Morbi mattis fringilla maximus. Mauris vitae cursus orci. Quisque sed tincidunt ante.
+### collect
 
-Aenean blandit sapien neque, at condimentum nisi scelerisque ac. Fusce dui libero, sodales sed sem ut, mattis imperdiet ex. Nunc a lectus ornare, consequat sapien a, tristique velit. Ut sollicitudin erat sit amet facilisis gravida. Phasellus quis mollis lacus. Suspendisse sit amet sapien id nisl auctor sollicitudin a quis quam. Maecenas nec orci eget velit bibendum vestibulum vel quis sem. Mauris libero neque, fringilla nec ex in, ultricies condimentum neque. Donec ultricies libero eget augue efficitur, at placerat metus maximus. Vivamus eu ligula libero. Sed aliquam at massa nec rutrum. Fusce dapibus risus eu magna volutpat, a ornare lorem fringilla. Nulla tincidunt lacus at est ornare, at sollicitudin magna luctus. Praesent consequat, neque ac suscipit aliquet, felis mauris porta augue, in pulvinar nunc ipsum non erat. Mauris urna ante, molestie placerat nibh id, commodo vehicula lorem. Morbi luctus risus a tempor tincidunt.
+`collect: (namespace: string) => (node: T) => React.ComponentType<Props & WithCollect> | T`<br />
+or</br>
+`collect: (node: T) => React.ComponenType<Props & WithColect> | T`
 
-Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus eu lectus sem. Maecenas cursus pulvinar faucibus. Pellentesque tempus vestibulum lacinia. Duis eu blandit velit. Duis at massa facilisis, rhoncus justo eget, posuere purus. Maecenas sed auctor quam. Sed tempus justo diam, eu egestas leo pulvinar et. Donec id porttitor nisl, sed sodales enim.
+Wraps element to collect.
 
-Sed blandit accumsan ante quis tincidunt. Duis suscipit, purus id consectetur tempor, nibh odio volutpat urna, quis egestas ligula nunc et nunc. Proin scelerisque, mauris vel volutpat iaculis, odio nunc cursus neque, id interdum massa libero non enim. Mauris ultricies odio turpis, id rhoncus dolor interdum sit amet. Nunc maximus interdum pharetra. Quisque fringilla dictum convallis. Phasellus vestibulum ornare diam, quis dignissim dui condimentum a. Phasellus a rhoncus ex, tempus volutpat ligula. Maecenas imperdiet placerat tortor sit amet pellentesque. In hac habitasse platea dictumst. Etiam a neque neque.
+If [Collector](#collector) prop **collect** is set with namespaces, firstly we must to call **collect** wrapper with namespace and then wrap component `collect(namespace: string)(component)`
 
-## WithCollect *(only in typescript)*
+If [Collector](#collector) prop **collect** is set with a single array, we just wrap component without calling with the namespace `collect(component)`
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur fringilla eget lectus a dignissim. Proin egestas enim eu ligula porttitor sollicitudin. Suspendisse potenti. Fusce augue nunc, ultricies a mattis et, placerat pharetra massa. Sed a ligula sit amet magna efficitur euismod. Duis venenatis viverra vulputate. Ut molestie accumsan dignissim. Integer dapibus lobortis libero sit amet tempus. Aliquam ac sapien ut sem venenatis euismod. In auctor, mauris ut gravida consequat, eros urna commodo neque, eu ultricies odio massa sit amet dolor. Nam sed dolor ut justo ullamcorper suscipit facilisis et nulla. Suspendisse aliquam vestibulum metus, at feugiat augue varius nec. Nulla pretium, dui ac porta pharetra, odio nunc faucibus neque, sit amet elementum lorem nulla sed diam.
+If argument _node_ is type of React Component it gets additional prop `collect: CollectMethod` which can be passed manually to [component childrens](examples.md#manually-pass-ref). About _collect_ prop [see more](#collectmethod)
 
-Vivamus ac rhoncus leo. Morbi vitae neque eget ipsum accumsan tincidunt. In augue libero, commodo in nulla nec, ullamcorper mattis ligula. Sed sodales varius odio, ac mattis est finibus vel. Sed maximus nulla sit amet placerat tincidunt. Pellentesque venenatis ipsum nisl, quis tincidunt leo rhoncus eget. Morbi mattis fringilla maximus. Mauris vitae cursus orci. Quisque sed tincidunt ante.
+This wrapper can be used also as a [decorator](examples.md#usage-with-decorator)
 
-Aenean blandit sapien neque, at condimentum nisi scelerisque ac. Fusce dui libero, sodales sed sem ut, mattis imperdiet ex. Nunc a lectus ornare, consequat sapien a, tristique velit. Ut sollicitudin erat sit amet facilisis gravida. Phasellus quis mollis lacus. Suspendisse sit amet sapien id nisl auctor sollicitudin a quis quam. Maecenas nec orci eget velit bibendum vestibulum vel quis sem. Mauris libero neque, fringilla nec ex in, ultricies condimentum neque. Donec ultricies libero eget augue efficitur, at placerat metus maximus. Vivamus eu ligula libero. Sed aliquam at massa nec rutrum. Fusce dapibus risus eu magna volutpat, a ornare lorem fringilla. Nulla tincidunt lacus at est ornare, at sollicitudin magna luctus. Praesent consequat, neque ac suscipit aliquet, felis mauris porta augue, in pulvinar nunc ipsum non erat. Mauris urna ante, molestie placerat nibh id, commodo vehicula lorem. Morbi luctus risus a tempor tincidunt.
+_See also:_<br />
+[WithCollect](#withcollect-only-in-typescript), [CollectMethod](#collectmethod)
 
-Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus eu lectus sem. Maecenas cursus pulvinar faucibus. Pellentesque tempus vestibulum lacinia. Duis eu blandit velit. Duis at massa facilisis, rhoncus justo eget, posuere purus. Maecenas sed auctor quam. Sed tempus justo diam, eu egestas leo pulvinar et. Donec id porttitor nisl, sed sodales enim.
+### WithCollect _(only in typescript)_
 
-Sed blandit accumsan ante quis tincidunt. Duis suscipit, purus id consectetur tempor, nibh odio volutpat urna, quis egestas ligula nunc et nunc. Proin scelerisque, mauris vel volutpat iaculis, odio nunc cursus neque, id interdum massa libero non enim. Mauris ultricies odio turpis, id rhoncus dolor interdum sit amet. Nunc maximus interdum pharetra. Quisque fringilla dictum convallis. Phasellus vestibulum ornare diam, quis dignissim dui condimentum a. Phasellus a rhoncus ex, tempus volutpat ligula. Maecenas imperdiet placerat tortor sit amet pellentesque. In hac habitasse platea dictumst. Etiam a neque neque.
+`interface WithCollect { collect?: CollectMethod }`
+
+Interface used to extend React Component Props interface
+
+Can be used:
+
+-   directly
+
+```jsx
+import React from "react";
+import { collect, WithCollect } from "@epranka/react-collector";
+
+@collect
+export class Foo extends React.Component<WithCollect> {}
+```
+
+-   with union operator
+
+```jsx
+import React from "react";
+import { collect, WithCollect } from "@epranka/react-collector";
+
+interface Props {
+	existedProps: any;
+}
+
+@collect
+export class Foo extends React.Component<Props & WithCollect> {}
+```
+
+-   with _extends_
+
+```jsx
+import React from "react";
+import { collect, WithCollect } from "@epranka/react-collector";
+
+interface Props extends WithCollect {
+	existedProps: any;
+}
+
+@collect
+export class Foo extends React.Component<Props> {}
+```
+
+_See also:_<br/>
+[CollectMethod](#collectmethod)
+
+## CollectMethod
+
+`CollectMethod: <T>( namespaceOrNode: T ) => T extends string ? (node: any) => void : void`
+
+Method is similar to [collect](#collect) wrapper, main difference is that the method is used to collect internal component elements instead the whole component.

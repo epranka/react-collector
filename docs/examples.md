@@ -19,11 +19,11 @@ class App extends Component {
 		// There we will set the array to collect all items to it
 		return (
 			<Collector collect={this.items}>
-				{ref => {
+				{collect => {
 					return (
 						<div>
-							<div ref={ref} />
-							<div ref={ref} />
+							<div ref={collect} />
+							<div ref={collect} />
 						</div>
 					);
 				}}
@@ -54,14 +54,17 @@ class App extends React.Component {
 		// There we will set multiple arrays. Object keys is a namespaces
 		return (
 			<Collector collect={{ foo: this.foos, bar: this.bars }}>
-				{ref => {
-					// We will call the ref method before the passing it to the reference. In this way we will set the namespace for the reference
+				{collect => {
+					/*
+					We will call the collect method before the passing it to the reference.
+					In this way we will set the namespace for the reference
+					*/
 					return (
 						<>
-							<div className="foo" ref={ref("foo")} />
-							<div className="foo" ref={ref("foo")} />
-							<div className="bar" ref={ref("bar")} />
-							<div className="bar" ref={ref("bar")} />
+							<div className="foo" ref={collect("foo")} />
+							<div className="foo" ref={collect("foo")} />
+							<div className="bar" ref={collect("bar")} />
+							<div className="bar" ref={collect("bar")} />
 						</>
 					);
 				}}
@@ -71,6 +74,8 @@ class App extends React.Component {
 }
 export { App };
 ```
+
+> For more information about **collect method** see [API reference](api.md#collectmethod)
 
 ## Usage with **collect**
 
@@ -105,7 +110,7 @@ class Foo extends React.Component {
 const WrappedFoo = collect(Foo);
 ```
 
-?> To use it with namespaces just set namespace by calling **collect** before the component wrap. For more information see [API reference](api.md#collect)
+> To use it with namespaces just set namespace by calling **collect** before the component wrap. For more information see [API reference](api.md#collect)
 
 ```jsx
 const WrappedFoo = collect("foo")(Foo); // 'foo' there is a namespace
@@ -144,7 +149,7 @@ class Foo extends React.Component {
 }
 ```
 
-?> To set a namespace, call a decorator. For more information see [API reference](api.md#collect)
+> To set a namespace, call a decorator. For more information see [API reference](api.md#collect)
 
 ```jsx
 @collect("foo") // 'foo' there is a namespace
@@ -186,12 +191,30 @@ const Foo = collect(props => {
 });
 ```
 
-?> To set namespace call "collect" before. For more information see [API reference](api.md#collect)
+> To set namespace call "collect" before. For more information see [API reference](api.md#collect)
+
+```jsx
+// 'foo' there is a namespace
+const Foo = collect("foo")(props => {
+	return <div className="foo" ref={props.collect} />;
+});
+```
+
+or
+
+```jsx
+const Foo = collect(props => {
+	// 'foo' there is a namespace
+	return <div className="foo" ref={props.collect("foo")} />;
+});
+```
+
+!> Do not set different namespaces twice
 
 ```jsx
 const Foo = collect("foo")(props => {
-	// 'foo' there is a namespace
-	return <div className="foo" ref={props.collect} />;
+	// throws error because of different namespace 'bar'
+	return <div className="foo" ref={props.collect("bar")} />;
 });
 ```
 
@@ -208,20 +231,23 @@ import { Collector } from "@epranka/react-collector";
 
 class App extends React.Component {
 	foos = [];
-    bars = [];
-    
-    componentDidMount() {
-        console.log(this.foos); // Shows collected Foo references
-        console.log(this.bars); // Shows collected Bar references
-    }
+	bars = [];
+
+	componentDidMount() {
+		console.log(this.foos); // Shows collected Foo references
+		console.log(this.bars); // Shows collected Bar references
+	}
 
 	render() {
-		return <Collector collect={{ foo: this.foos, bar: this.bars }}>
-			<Nested />
-		</Collector>;
+		return (
+			<Collector collect={{ foo: this.foos, bar: this.bars }}>
+				<Nested />
+			</Collector>
+		);
 	}
 }
 ```
+
 ```jsx
 // nested.jsx
 
@@ -256,13 +282,14 @@ export class Foo extends React.Compnent {
 	}
 }
 ```
+
 ```jsx
 // Bar.jsx
 
 import React from "react";
 import { collect } from "@epranka/react-collector";
 
-@collect('bar')
+@collect("bar")
 export class Bar extends React.Compnent {
 	render() {
 		return <div />;
@@ -307,7 +334,7 @@ class Foo extends React.Component {
 }
 ```
 
-?> Typescript version. For more information see [API reference](api.md#withcollect-only-in-typescript)
+> Typescript version. For more information see [API reference](api.md#withcollect-only-in-typescript)
 
 ```tsx
 import { Collector, collect, WithCollect } from "@epranka/react-collector";
@@ -356,7 +383,7 @@ const Foo = collect(
 );
 ```
 
-?> But you can do the same with **collect**. For more information see example above [Usage with functional component](#usage-with-functional-component)
+> But you can do the same with **collect**. For more information see example above [Usage with functional component](#usage-with-functional-component)
 
 ```jsx
 const Foo = collect(props => {
@@ -364,4 +391,4 @@ const Foo = collect(props => {
 });
 ```
 
-?> For more detail checkout the [API reference](api.md)
+> For more details checkout the [API reference](api.md#collect)
