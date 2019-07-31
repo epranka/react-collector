@@ -70,6 +70,11 @@ describe("Test @epranka/react-collector", () => {
 		each(instance.bars, node => {
 			expect(node.constructor.name).toEqual("Bar");
 		});
+
+		expect(instance.bazs.length).toEqual(2);
+		each(instance.bazs, node => {
+			expect(node.constructor.name).toEqual("HTMLDivElement");
+		});
 	});
 
 	it("collects from nested components", () => {

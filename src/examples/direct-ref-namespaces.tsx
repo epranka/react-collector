@@ -14,13 +14,13 @@ class App7 extends React.Component {
 	public render() {
 		return (
 			<Collector collect={{ foo: this.foos, bar: this.bars }}>
-				{ref => {
+				{collect => {
 					return (
 						<>
-							<div ref={ref("foo")} />
-							<div ref={ref("foo")} />
-							<div ref={ref("bar")} />
-							<div ref={ref("bar")} />
+							<div ref={collect("foo")} />
+							<div ref={collect("foo")} />
+							<div ref={collect("bar")} />
+							<div ref={collect("bar")} />
 						</>
 					);
 				}}

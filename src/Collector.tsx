@@ -1,33 +1,55 @@
 import * as React from "react";
 import hoistNonReactStatics from "hoist-non-react-statics";
 
+// Create Context using React Context API
 const Context = React.createContext<Collector | null>(undefined);
 
+// Define collect method type
+type CollectMethod = <T>(
+	namespaceOrNode: T
+) => T extends string ? (node: any) => void : void;
+
 interface CollectorProps {
+	/** To collect all items to a single array, provide an empty array. To collect elements to their specific namespaces (types) provide an object of arrays with properties as namespaces */
 	collect: { [namespace: string]: any[] } | any[];
+	/** Provide an array of childrens (as a simple React setup) or function with collect: CollectMethod as an argument which can be used to reference direct elements */
+	children: React.ReactNode | ((collect: CollectMethod) => React.ReactNode);
 }
 
+/**
+ * Provides React Context API collects items to an array or arrays from the whole tree
+ *
+ * @export
+ * @class Collector
+ * @extends {React.Component<CollectorProps>}
+ */
 export class Collector extends React.Component<CollectorProps> {
 	constructor(props: CollectorProps) {
 		super(props);
-		this.directRef = this.directRef.bind(this);
+
+		// context bindings
+		this.collectMethod = this.collectMethod.bind(this);
 		this.setRef = this.setRef.bind(this);
+
+		// assert props
 		this.assertProps();
 	}
 
 	private assertProps() {
+		// props collect must be an array or an object
 		if (Array.isArray(this.props.collect)) {
 			return true;
 		} else if (this.props.collect && typeof this.props.collect) {
 			return true;
 		} else {
 			throw new Error(
-				`[Collector] props 'collect' must be an array or object`
+				`[Collector] props 'collect' must be an array or an object`
 			);
 		}
 	}
 
-	public setRef(node: any, namespace?: string) {
+	public setRef(node: any, namespace?: string): void {
+		// if no node, ignore
 		if (!node) return;
 		if (Array.isArray(this.props.collect)) {
 			// single namespace
@@ -52,9 +74,10 @@ export class Collector extends React.Component<CollectorProps> {
 		}
 	}
 
-	private directRef(namespaceOrNode?: any) {
+	// collect method
+	public collectMethod<T>(namespaceOrNode: T) {
 		if (typeof namespaceOrNode === "string") {
-			return node => {
+			return (node: any) => {
 				this.setRef(node, namespaceOrNode);
 			};
 		} else {
@@ -66,39 +89,17 @@ export class Collector extends React.Component<CollectorProps> {
 		return (
 			<Context.Provider value={this}>
 				{typeof this.props.children === "function"
-					? this.props.children(this.directRef)
+					? (this.props.children as any)(this.collectMethod) // ignore linting
 					: this.props.children}
 			</Context.Provider>
 		);
 	}
 }
 
-interface CollectorChildProps {
-	namespace?: string;
-	children: (arg: { ref: (node: any) => void }) => any;
-}
-
-export class Collect extends React.Component<CollectorChildProps> {
-	private noop() {}
-	public render() {
-		return (
-			<Context.Consumer>
-				{collector => {
-					return this.props.children({
-						ref: collector
-							? node =>
-									collector.setRef(node, this.props.namespace)
-							: this.noop
-					});
-				}}
-			</Context.Consumer>
-		);
-	}
-}
-
 interface CollectComponentProps {
-	Component: any;
-	setRef: any;
+	namespace: string;
+	Component: React.ComponentType;
+	collect: CollectMethod;
 	componentProps: any;
 }
 class CollectComponent extends React.Component<CollectComponentProps> {
@@ -106,19 +107,43 @@ class CollectComponent extends React.Component<CollectComponentProps> {
 	constructor(props, context) {
 		super(props, context);
 		this.refIsManuallySet = false;
-		this.manuallyPassedRef = this.manuallyPassedRef.bind(this);
+		this.collectMethod = this.collectMethod.bind(this);
 		this.selfRef = this.selfRef.bind(this);
 	}
 
-	private manuallyPassedRef(node: any) {
+	private collectMethod(namespaceOrNode: string | any) {
 		this.refIsManuallySet = true;
-		this.props.setRef(node);
+		if (typeof namespaceOrNode === "string") {
+			if (
+				this.props.namespace &&
+				this.props.namespace !== namespaceOrNode
+			) {
+				throw new Error(
+					`[Collector] namespace '${
+						this.props.namespace
+					}' already set. Tried to override '${
+						this.props.namespace
+					}' with '${namespaceOrNode}'`
+				);
+			}
+			return (node: any) => {
+				this.props.collect(namespaceOrNode)(node);
+			};
+		} else if (this.props.namespace) {
+			this.props.collect(this.props.namespace)(namespaceOrNode);
+		} else {
+			return this.props.collect(namespaceOrNode);
+		}
 	}
 
 	private selfRef(node: any) {
 		// do not self ref if it manually passed
 		if (this.refIsManuallySet) return;
-		this.props.setRef(node);
+		if (this.props.namespace) {
+			this.props.collect(this.props.namespace)(node);
+		} else {
+			this.props.collect(node);
+		}
 	}
 
 	private componentIsStateless(Component) {
@@ -132,8 +157,9 @@ class CollectComponent extends React.Component<CollectComponentProps> {
 		const { Component, componentProps } = this.props;
 		const props: { [key: string]: any } = {
 			...componentProps,
-			collect: this.manuallyPassedRef
+			collect: this.collectMethod
 		};
+		// if component is functional set self ref
 		if (!this.componentIsStateless(Component)) {
 			props["ref"] = this.selfRef;
 		}
@@ -141,21 +167,31 @@ class CollectComponent extends React.Component<CollectComponentProps> {
 	}
 }
 
-const collectComponent = (namespace?: string) => Component => {
+const collectComponent = (namespace?: string) => (
+	Component: React.ComponentType
+) => {
 	class WrapWithContext extends React.Component {
+		private noop() {
+			return () => undefined;
+		}
 		public render() {
 			return (
-				<Collect namespace={namespace}>
-					{({ ref }) => {
+				<Context.Consumer>
+					{collector => {
 						return (
 							<CollectComponent
+								namespace={namespace}
 								Component={Component}
 								componentProps={this.props}
-								setRef={ref}
+								collect={
+									collector
+										? (collector.collectMethod as any)
+										: this.noop
+								}
 							/>
 						);
 					}}
-				</Collect>
+				</Context.Consumer>
 			);
 		}
 	}
