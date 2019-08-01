@@ -4,7 +4,6 @@
 	"description": "Library lets you to collect multiple react component references along the whole tree",
 	"scripts": {
 		"ts-build": "rm -rf ./dist/** && tsc && rm -rf ./dist/examples",
-		"babel-build": "rm -rf ./dist/** && babel ./src --out-dir dist --extensions '.ts,.tsx' && rm -rf ./dist/examples",
 		"semantic-release": "semantic-release",
 		"watch": "tsc -- --watch",
 		"docs": "docsify serve docs",
