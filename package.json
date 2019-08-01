@@ -1,83 +1,83 @@
 {
-	"name": "@epranka/react-collector",
-	"version": "1.0.0",
-	"description": "Library lets you to collect multiple react component references along the whole tree",
-	"scripts": {
-		"ts-build": "rm -rf ./dist/** && tsc && rm -rf ./dist/examples",
-		"semantic-release": "semantic-release",
-		"watch": "tsc -- --watch",
-		"docs": "docsify serve docs",
-		"test": "jest"
-	},
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/epranka/react-collector.git"
-	},
-	"bugs": {
-		"url": "https://github.com/epranka/react-collector.git/issues"
-	},
-	"homepage": "https://github.com/epranka/react-collector.git",
-	"files": [
-		"dist"
-	],
-	"types": "dist/index.d.ts",
-	"main": "dist/index.js",
-	"keywords": [
-		"react",
-		"npm",
-		"typescript",
-		"npm package",
-		"collector",
-		"reference",
-		"multiple",
-		"references",
-		"epranka",
-		"kodmina",
-		"edvinas",
-		"pranka",
-		"babel"
-	],
-	"author": "Edvinas Pranka, Kodmina, https://www.kodmina.lt",
-	"contributors": [
-		{
-			"name": "Edvinas Pranka",
-			"email": "epranka@gmail.com"
-		}
-	],
-	"license": "MIT",
-	"dependencies": {
-		"hoist-non-react-statics": "^3.3.0",
-		"react": "^16.8.3",
-		"react-dom": "^16.8.3"
-	},
-	"devDependencies": {
-		"@babel/cli": "^7.2.3",
-		"@babel/core": "^7.3.4",
-		"@babel/plugin-proposal-class-properties": "^7.3.4",
-		"@babel/plugin-proposal-decorators": "^7.4.4",
-		"@babel/plugin-proposal-object-rest-spread": "^7.3.4",
-		"@babel/plugin-transform-typescript": "^7.3.2",
-		"@babel/preset-env": "^7.3.4",
-		"@babel/preset-typescript": "^7.3.3",
-		"@types/enzyme": "^3.10.3",
-		"@types/hoist-non-react-statics": "^3.3.1",
-		"@types/jest": "^24.0.9",
-		"@types/react": "^16.8.5",
-		"@types/react-dom": "^16.8.2",
-		"enzyme": "^3.10.0",
-		"enzyme-adapter-react-16": "^1.10.0",
-		"jest": "^24.1.0",
-		"lodash": "^4.17.15",
-		"react-test-renderer": "^16.8.6",
-		"semantic-release": "^15.13.3",
-		"ts-jest": "^24.0.0",
-		"tslint": "^5.13.0",
-		"tslint-config-prettier": "^1.18.0",
-		"tslint-react": "^3.6.0",
-		"typescript": "^3.3.3333"
-	},
-	"peerDependencies": {
-		"react": "*",
-		"react-dom": "*"
-	}
+  "name": "@epranka/react-collector",
+  "version": "0.0.0-development",
+  "description": "Library lets you to collect multiple react component references along the whole tree",
+  "scripts": {
+    "build": "rm -rf ./dist/** && tsc && rm -rf ./dist/examples",
+    "watch": "tsc -- --watch",
+    "docs": "docsify serve docs",
+    "test": "jest",
+    "semantic-release": "semantic-release"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/epranka/react-collector.git"
+  },
+  "bugs": {
+    "url": "https://github.com/epranka/react-collector.git/issues"
+  },
+  "homepage": "https://github.com/epranka/react-collector.git",
+  "files": [
+    "dist"
+  ],
+  "types": "dist/index.d.ts",
+  "main": "dist/index.js",
+  "keywords": [
+    "react",
+    "npm",
+    "typescript",
+    "npm package",
+    "collector",
+    "reference",
+    "multiple",
+    "references",
+    "epranka",
+    "kodmina",
+    "edvinas",
+    "pranka",
+    "babel"
+  ],
+  "author": "Edvinas Pranka, Kodmina, https://www.kodmina.lt",
+  "contributors": [
+    {
+      "name": "Edvinas Pranka",
+      "email": "epranka@gmail.com"
+    }
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "hoist-non-react-statics": "^3.3.0",
+    "react": "^16.8.3",
+    "react-dom": "^16.8.3"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.3.4",
+    "@babel/plugin-proposal-class-properties": "^7.3.4",
+    "@babel/plugin-proposal-decorators": "^7.4.4",
+    "@babel/plugin-proposal-object-rest-spread": "^7.3.4",
+    "@babel/plugin-transform-typescript": "^7.3.2",
+    "@babel/preset-env": "^7.3.4",
+    "@babel/preset-typescript": "^7.3.3",
+    "@types/enzyme": "^3.10.3",
+    "@types/hoist-non-react-statics": "^3.3.1",
+    "@types/jest": "^24.0.9",
+    "@types/react": "^16.8.5",
+    "@types/react-dom": "^16.8.2",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.10.0",
+    "jest": "^24.1.0",
+    "lodash": "^4.17.15",
+    "react-test-renderer": "^16.8.6",
+    "semantic-release": "^15.13.19",
+    "ts-jest": "^24.0.0",
+    "tslint": "^5.13.0",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-react": "^3.6.0",
+    "typescript": "^3.3.3333"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "react-dom": "*"
+  }
 }
