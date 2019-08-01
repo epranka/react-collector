@@ -38,4 +38,4 @@ class App extends Component {
 }
 ```
 
-?> Next checkout the [examples](examples.md)
+> Next checkout the [examples](examples.md)

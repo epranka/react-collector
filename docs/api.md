@@ -107,3 +107,89 @@ _See also:_<br/>
 `CollectMethod: <T>( namespaceOrNode: T ) => T extends string ? (node: any) => void : void`
 
 Method is similar to [collect](#collect) wrapper, main difference is that the method is used to collect internal component elements instead the whole component.
+
+There is a three ways to use _collect_ method:
+
+-   _collect_ method when using [Collector](#collector)
+
+```tsx
+<Collector collect={this.items}>
+	{collect => {
+		return <div ref={collect} />;
+	}}
+</Collector>
+```
+
+-   _collect_ method when using [collect](#collect) wrapper and a class component
+
+```tsx
+@collect
+class Foo extends React.Component<Props & WithCollect> {
+	render() {
+		return <div ref={props.collect} />;
+	}
+}
+```
+
+> If you use _collect_ method (in props), _collect_ method reference will be collected and no _Foo_ instance, but if you not use _collect_ method, _Foo_ instance will be collected
+
+-   _collect_ method when using [collect](#collect) wrapper and a functional component
+
+```tsx
+const Foo = collect((props: Props & WithCollect) => {
+	return <div ref={props.collect} />;
+});
+```
+
+!> In functional component if you not use _collect_ method, nothing will be collected, because functional component cannot be referenced by it self
+
+With _collect_ method you can also set a namespace similar to [collect](#collect) wrapper
+
+-   with namespace and the [Collector](#collector)
+
+```tsx
+<Collector collect={this.items}>
+	{collect => {
+		return <div ref={collect("foo")} />;
+	}}
+</Collector>
+```
+
+-   with namespace and a class component
+
+```tsx
+@collect
+class Foo extends React.Component<Props & WithCollect> {
+	render() {
+		return <div ref={props.collect("foo")} />;
+	}
+}
+```
+
+-   with namespace and a functional component
+
+```tsx
+const Foo = collect((props: Props & WithCollect) => {
+	return <div ref={props.collect("foo")} />;
+});
+```
+
+!> When using [collect](#collect) wrapper and the _collect_ method do not set different namespaces twice. The following examples throws an error
+
+```tsx
+const Foo = collect("foo")((props: Props & WithCollect) => {
+	return <div ref={props.collect("bar")} />;
+});
+
+or;
+
+@collect("foo")
+class Foo extends React.Component<Props & WithCollect> {
+	render() {
+		return <div ref={props.collect("bar")} />;
+	}
+}
+```
+
+_See also:_<br/>
+[Collector](#collector), [collect](#collect), [WithCollect](#withcollect-only-in-typescript)
