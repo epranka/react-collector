@@ -6,7 +6,7 @@
 		"build": "rm -rf ./dist/** && tsc && rm -rf ./dist/examples",
 		"watch": "tsc -- --watch",
 		"docs": "docsify serve docs",
-		"test": "jest && npm build",
+		"test": "jest && npm run build",
 		"semantic-release": "semantic-release"
 	},
 	"publishConfig": {
