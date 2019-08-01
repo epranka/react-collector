@@ -25,9 +25,17 @@ Checkout the examples of usage in [examples page](examples.md)
 
 Checkout the [api reference](api.md) of detail usage information
 
-## Author and collaboration
+## Contributing
 
-If you have questions or want to contribute to this package, feel free to contact
+-   Fork it!
+-   Create your feature branch: git checkout -b my-new-feature
+-   Commit your changes: git commit -am 'Add some feature'
+-   Push to the branch: git push origin my-new-feature
+-   Submit a pull request
+
+## Author
+
+If you have questions, feel free to contact
 
 -   Edvinas Pranka
 -   Twitter: [@epranka](https://twitter.com/epranka)
