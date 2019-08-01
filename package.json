@@ -1,6 +1,6 @@
 {
 	"name": "@epranka/react-collector",
-	"version": "1.0.1",
+	"version": "1.0.0",
 	"description": "Library lets you to collect multiple react component references along the whole tree",
 	"scripts": {
 		"ts-build": "rm -rf ./dist/** && tsc && rm -rf ./dist/examples",
