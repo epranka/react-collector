@@ -1,5 +1,7 @@
 ## @epranka/react-collector
 
+![Build](https://travis-ci.org/epranka/react-collector.svg?branch=master)
+
 > Simple and flexible way to reference react components
 
 ## What it is
