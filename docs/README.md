@@ -37,6 +37,8 @@ Checkout the [api reference](api.md) of detail usage information
 
 ## Author
 
+Special thanks to [Vipin Kumar Rawat](https://twitter.com/aesthytik)
+
 If you have questions, feel free to contact
 
 -   Edvinas Pranka
