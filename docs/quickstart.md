@@ -38,4 +38,23 @@ class App extends Component {
 }
 ```
 
+## Simple usage with hook
+
+```jsx
+    import {useCollector} from '@epranka/react-collector';
+    
+    const App = (props) => {
+        const [collect, items] = useCollector();
+
+        useEffect(() => {
+            console.log(items); // Shows collected div elements
+        });
+
+        return <div>
+            <div ref={collect} />
+            <div ref={collect} />
+        </div>
+    }
+```
+
 > Next checkout the [examples](examples.md)

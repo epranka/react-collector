@@ -2,7 +2,7 @@
 
 ## Simple usage at local level
 
-This examples shows how to collect multiple elements to a single array
+This example shows how to collect multiple elements to a single array
 
 ```jsx
 import React, { Component } from "react";
@@ -31,6 +31,29 @@ class App extends Component {
 		);
 	}
 }
+```
+
+## Usage with hook
+
+This example show hot to collect multiple elements to a single array using new React Hook API
+
+```jsx
+import { useCollector } from "@epranka/react-collect";
+
+const App = props => {
+	const [collect, items] = useCollector();
+
+	useEffect(() => {
+		console.log(items); // Shows collected div elements
+	});
+
+	return (
+		<div>
+			<div ref={collect} />
+			<div ref={collect} />
+		</div>
+	);
+};
 ```
 
 ## Usage with namespaces at local level

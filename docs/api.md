@@ -10,9 +10,8 @@ import { Collector, collect, WithCollect } from "@epranka/react-collector";
 | --------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
 | [Collector](#collector)                                               | Root component of the collector package. Accepts a single prop **collect** which can be an array or an object of arrays |
 | [collect](#collect)                                                   | Wrapper component to wrap and element to collect. Also can be used as a decorator                                       |
+| [useCollector](#useCollector)                                         | Collect elements hook for new React Hook API                                                                            |
 | [WithCollect](#withcollect-only-in-typescript) _(only in typescript)_ | Interface with an optional property **collect**                                                                         |
-
-API Reference inspiration https://docs.veritone.com/#/apis/reference/mutation/?id=createlibrarytype
 
 ### Collector
 
@@ -52,6 +51,32 @@ This wrapper can be used also as a [decorator](examples.md#usage-with-decorator)
 
 _See also:_<br />
 [WithCollect](#withcollect-only-in-typescript), [CollectMethod](#collectmethod)
+
+### useCollector
+
+`useCollector: () => [(any) => void, any[])`
+
+Returns array with following two elements:
+`collect` - method to collect element
+`items` - array of collected elements
+
+```jsx
+import { useCollector } from "@epranka/react-collect";
+const App = props => {
+	const [collect, items] = useCollector();
+
+	useEffect(() => {
+		console.log(items); // Shows collected div elements
+	});
+
+	return (
+		<div>
+			<div ref={collect} />
+			<div ref={collect} />
+		</div>
+	);
+};
+```
 
 ### WithCollect _(only in typescript)_
 

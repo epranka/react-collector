@@ -119,11 +119,7 @@ class CollectComponent extends React.Component<CollectComponentProps> {
 				this.props.namespace !== namespaceOrNode
 			) {
 				throw new Error(
-					`[Collector] namespace '${
-						this.props.namespace
-					}' already set. Tried to override '${
-						this.props.namespace
-					}' with '${namespaceOrNode}'`
+					`[Collector] namespace '${this.props.namespace}' already set. Tried to override '${this.props.namespace}' with '${namespaceOrNode}'`
 				);
 			}
 			return (node: any) => {
@@ -213,3 +209,12 @@ export const collect = (namespaceOrComponent?: any) => {
 export interface WithCollect {
 	collect?: any;
 }
+
+// React hook
+export const useCollector = () => {
+	const items: any[] = [];
+	const collect = (node: any) => {
+		items.push(node);
+	};
+	return [collect, items] as [(node: any) => void, any[]];
+};

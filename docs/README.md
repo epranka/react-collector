@@ -12,6 +12,7 @@ See the [Quick start](quickstart.md) guide for more details.
 
 ## Features
 
+-   useCollector for new React Hook API
 -   Reference deeply nested components using the [React Context API](https://reactjs.org/docs/context.html)
 -   Reference array of components
 -   Reference different kind of components to their namespaces (arrays)

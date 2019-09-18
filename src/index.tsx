@@ -1,1 +1,1 @@
-export { Collector, collect, WithCollect } from "./Collector";
+export { Collector, collect, WithCollect, useCollector } from "./Collector";
