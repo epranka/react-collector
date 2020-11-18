@@ -73,7 +73,7 @@
 		"jest": "^24.1.0",
 		"lodash": "^4.17.15",
 		"react-test-renderer": "^16.8.6",
-		"semantic-release": "^15.13.19",
+		"semantic-release": "^17.2.3",
 		"ts-jest": "^24.0.0",
 		"tslint": "^5.13.0",
 		"tslint-config-prettier": "^1.18.0",
